@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Product;
 
 class Category extends Model
 {
@@ -19,8 +20,8 @@ class Category extends Model
         'parentid'
     ];
 
-    public function subcategory() {
-        return $this->hasMany(Category::class, 'parentid');
+    public function product() {
+        return $this->hasMany(Product::class, 'categoryid');
     }
 
     public function parent() {

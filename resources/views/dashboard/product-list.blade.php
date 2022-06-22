@@ -23,7 +23,7 @@
                             <th scope="col">Order</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Product Slug</th>
-                            <th scope="col">Category ID</th>
+                            <th scope="col">Category</th>
                             <th scope="col" align="center">Action</th>
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@
                                 <th scope="row">{{ $info->order }}</th>
                                 <td>{{ $info->productname }}</td>
                                 <td>{{ $info->slug }}</td>
-                                <td>{{ $info->categoryid }}</td>
+                                <td>{{ $info->category->categoryname }}</td>
                                 <td>
                                     <a href="{{ route('category.edit', ['id' => $info->id ]) }}"><i class="fa-solid fa-pen-to-square mr-2" style="color: black"></i></a>
                                     <a href="{{ route('category.delete', ['id' => $info->id ]) }}" style="color: rgb(231, 180, 9)"><i class="fa-solid fa-trash ml-2"></i></a>

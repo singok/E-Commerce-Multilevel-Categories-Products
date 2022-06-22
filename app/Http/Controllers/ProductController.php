@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     // list all products
     public function index() {
-        $products = Product::orderBy('order', 'ASC')->get();
+        $products = Product::with('category')->orderBy('order', 'ASC')->get();
         return view('dashboard.product-list', ['dataInfo' => $products]);
     }
 
