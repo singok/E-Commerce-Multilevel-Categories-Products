@@ -1,11 +1,11 @@
 @extends('layout.dashboard')
 
 @section('title')
-    Add Category
+    Update Category
 @endsection
 
 @section('content')
-    <x-content-header heading="Category" r-name="category" title="Add" />
+    <x-content-header heading="Category" r-name="category" title="Update" />
 
     <!-- Main content -->
     <section class="content">
@@ -21,16 +21,22 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
-                <form action="{{ route('category.insert') }}" class="m-3" method="POST">
+                <form action="{{ route('category.update') }}" class="m-3" method="POST">
                     @csrf
-                    <x-input-box type="text" label="Category Name:" id="categoryName" name="categoryname"
-                        placeholder="Enter Category Name..." />
+                    <div class="form-group">
+                        <label for="categoryName">Category Name:</label>
+                        <input type="text" value="{{ $dataInfo->categoryname }}" class="form-control" id="categoryName" name="categoryname">
+                        <input type="hidden" value="{{ $dataInfo->id }}" name="categoryid">
+                    </div>
                     @error('categoryname')
                         <div class="alert-danger">
                             {{ $message }}
                         </div>
                     @enderror
-                    <x-input-box type="number" label="Order:" id="order" name="order" placeholder="Enter Order..." />
+                    <div class="form-group">
+                        <label for="order">Order:</label>
+                        <input type="number" value="{{ $dataInfo->order }}" class="form-control" id="order" name="order">
+                    </div>
                     @error('order')
                         <div class="alert-danger">
                             {{ $message }}
@@ -38,14 +44,14 @@
                     @enderror
                     <div class="form-group">
                         <label for="inputCategory">Parent Category:</label>
-                        <select id="inputCategory" class="form-control" name="parentid">
-                            <option selected value="0">Parent ID</option>
-                            @foreach ($dataInfo as $info)
+                        <select id="inputCategory" class="form-control" name="parentid" value="{{ $dataInfo->categoryname }}">
+                            <option value="0">Parent ID</option>
+                            @foreach ($selectItems as $info)
                                 <option value='{{ $info->id }}'>{{ $info->categoryname }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

@@ -33,4 +33,10 @@ Route::controller(DashboardController::class)->prefix('admin')->group( function 
     Route::get('category', 'displayCategory')->name('category');
     Route::get('category-add', 'addForm')->name('category.add');
     Route::post('category-store', 'store')->name('category.insert');
+    Route::get('category-delete/{id}', 'destroy')->name('category.delete');
+    Route::get('category-edit/{id}', 'edit')->name('category.edit');
+    Route::get('category-restore', 'displayTrashedCategory')->name('category.restore');
+    Route::get('category-remove/{id}', 'deletePermanently')->name('category.remove');
+    Route::post('category/update', 'updateCategory')->name('category.update');
+    Route::get('category-restinct/{id}', 'restoreCategory')->name('category.restinct');
 });

@@ -1,0 +1,1 @@
+<a href="{{ route($routeName) }}"><button type="button" class="btn btn-{{ $type }}">{{ $info }}</button></a>

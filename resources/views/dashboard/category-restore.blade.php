@@ -1,12 +1,12 @@
 @extends('dashboard.dash')
 
 @section('title')
-    Category
+    Trash Bin
 @endsection
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Category" r-name="category" title="category" />
+    <x-content-header heading="Deleted Categories" r-name="category" title="category-deleted" />
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -14,9 +14,6 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="row m-2">
-                    <x-button r-name="category.add" btn-type="primary" label="Add Category" /> 
-                </div>
                 <table class="table m-2">
                     <thead>
                         <tr>
@@ -33,8 +30,8 @@
                                 <td>{{ $info->categoryname }}</td>
                                 <td>{{ $info->parentid }}</td>
                                 <td>
-                                    <a href="{{ route('category.edit', ['id' => $info->id ]) }}"><i class="fa-solid fa-pen-to-square mr-2" style="color: black"></i></a>
-                                    <a href="{{ route('category.delete', ['id' => $info->id ]) }}" style="color: rgb(231, 180, 9)"><i class="fa-solid fa-trash ml-2"></i></a>
+                                    <a href="{{ route('category.restinct', ['id' => $info->id ]) }}"><i class="fa-solid fa-trash-arrow-up" style="color:green"></i></a>
+                                    <a href="{{ route('category.remove', ['id' => $info->id ]) }}" style="color: red"><i class="fa-solid fa-trash ml-2"></i></a>
                                 </td>
                             </tr>
                         @endforeach
