@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 Use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('login');
@@ -39,4 +40,15 @@ Route::controller(DashboardController::class)->prefix('admin')->group( function 
     Route::get('category-remove/{id}', 'deletePermanently')->name('category.remove');
     Route::post('category/update', 'updateCategory')->name('category.update');
     Route::get('category-restinct/{id}', 'restoreCategory')->name('category.restinct');
+});
+
+Route::controller(ProductController::class)->prefix('admin')->group( function () {
+    // list product
+    Route::get('products/list', 'index')->name('product');
+
+    // add product
+    Route::get('products/add', 'add')->name('product.add');
+
+    // store product
+    Route::post('product/store', 'store')->name('product.store');
 });

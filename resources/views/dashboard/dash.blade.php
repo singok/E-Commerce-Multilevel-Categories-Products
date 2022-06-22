@@ -13,7 +13,7 @@ Dashboard
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <x-card bg-color="info" icon-name="bag" total="{{ $categoryCount }}" card-name="Categories" />
+            <x-card bg-color="info" icon-name="bag" total="200" card-name="Categories" />
             <x-card bg-color="success" icon-name="stats-bars" total="500" card-name="Products" />
             <x-card bg-color="warning" icon-name="person-add" total="210" card-name="Sales" />
             <x-card bg-color="danger" icon-name="pie-graph" total="1500" card-name="Vendors" />

@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <x-content-header heading="Category" r-name="category" title="Update" />
 
     <!-- Main content -->
@@ -25,7 +26,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="categoryName">Category Name:</label>
-                        <input type="text" value="{{ $dataInfo->categoryname }}" class="form-control" id="categoryName" name="categoryname">
+                        <input type="text" value="{{ $dataInfo->categoryname }}" class="form-control" id="categoryName"
+                            name="categoryname">
                         <input type="hidden" value="{{ $dataInfo->id }}" name="categoryid">
                     </div>
                     @error('categoryname')
@@ -35,7 +37,8 @@
                     @enderror
                     <div class="form-group">
                         <label for="order">Order:</label>
-                        <input type="number" value="{{ $dataInfo->order }}" class="form-control" id="order" name="order">
+                        <input type="number" value="{{ $dataInfo->order }}" class="form-control" id="order"
+                            name="order">
                     </div>
                     @error('order')
                         <div class="alert-danger">
@@ -44,10 +47,12 @@
                     @enderror
                     <div class="form-group">
                         <label for="inputCategory">Parent Category:</label>
-                        <select id="inputCategory" class="form-control" name="parentid" value="{{ $dataInfo->categoryname }}">
-                            <option value="0">Parent ID</option>
+                        <select id="inputCategory" class="form-control" name="parentid"
+                            value="{{ $dataInfo->categoryname }}">
+                            <option value="0" @if ($dataInfo->parentid == 0) selected @endif>Parent ID</option>
                             @foreach ($selectItems as $info)
-                                <option value='{{ $info->id }}'>{{ $info->categoryname }}</option>
+                                <option value='{{ $info->id }}' @if ($dataInfo->parentid == $info->id) selected @endif>
+                                    {{ $info->categoryname }}</option>
                             @endforeach
                         </select>
                     </div>
