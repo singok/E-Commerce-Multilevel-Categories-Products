@@ -16,7 +16,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return view('dashboard.image-list');
+        $products = Image::with('product')->get();
+        return view('dashboard.image-list', ['dataInfo' => $products]);
     }
 
     /**
@@ -48,11 +49,11 @@ class ImageController extends Controller
         $images = $request->file('images');
         $files = array();
         foreach($images as $img) {
-            $fileName = $img->getClientOriginalName();
+            $fileName = time().'_'.$img->getClientOriginalName();
             $img->storeAs('public/productimages', $fileName);
             $files[] = $fileName;
         }
-        
+
         // insert details
         $info = Image::create([
             'multipleimages' => implode('|', $files),
@@ -110,6 +111,18 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pathDeleted = NULL;
+        $image = Image::find($id);
+        $imageArray = explode('|', $image->multipleimages);
+        foreach ($imageArray as $img) {
+            Storage::delete('public/productimages/'.$img);
+            $pathDeleted = 1;
+        }
+        $imageDetailDeleted = $image->delete();
+        if (!empty($imageDetailDeleted) && !empty($pathDeleted)) {
+            return back('success', 'Product deleted successfully.');
+        } else {
+            return back('error', 'Something went wrong.');
+        }
     }
 }

@@ -72,4 +72,7 @@ Route::controller(ImageController::class)->prefix('admin/products')->group( func
 
     // store images
     Route::post('images/store', 'store')->name('images.store');
+
+    // remove product image along with description
+    Route::get('image/delete/{id}', 'destroy')->name('productimage.remove');
 });
