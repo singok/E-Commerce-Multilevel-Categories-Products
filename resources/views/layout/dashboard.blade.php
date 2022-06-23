@@ -219,8 +219,8 @@
                         <x-nav rname="admin.dashboard" name="Dashboard" icon="rectangle-list"/>
                         <x-nav rname="category" name="Category" icon="layer-group"/>
                         <x-nav rname="product" name="Product" icon="list-check"/>
+                        <x-nav rname="images.index" name="Product Images" icon="images" />
                         <x-nav rname="category.restore" name="Deleted Category" icon="trash" />
-                    
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

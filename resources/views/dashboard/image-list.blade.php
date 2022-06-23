@@ -1,12 +1,12 @@
 @extends('dashboard.dash')
 
 @section('title')
-    Product
+    Product Images
 @endsection
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Product" r-name="product" title="products" />
+    <x-content-header heading="Product Images" r-name="product" title="Images" />
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -15,7 +15,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="row m-2">
-                    <x-button r-name="product.add" btn-type="primary" label="Add product" />
+                    <x-button r-name="images.create" btn-type="info" label="Add images & description" />
                 </div>
                 <table class="table m-2">
                     <thead>
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dataInfo as $info)
+                        {{-- @foreach ($dataInfo as $info)
                             <tr>
                                 <th scope="row">{{ $info->order }}</th>
                                 <td>{{ $info->productname }}</td>
@@ -41,7 +41,7 @@
                                         style="color: rgb(231, 180, 9)"><i class="fa-solid fa-trash ml-2"></i></a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>

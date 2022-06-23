@@ -41,4 +41,40 @@ class ProductController extends Controller
             return redirect()->back('error', 'Something went wrong.');
         }
     }
+
+    // remove product detail
+    public function remove($id) {
+        $info = Product::where('id', $id)->delete();
+        if (!empty($info)) {
+            return redirect()->back('success', 'Product deleted successfully.');
+        } else {
+            return redirect()->back('error', 'Something went wrong.');
+        }
+    }
+
+    // diplay edit form
+    public function edit($id) {
+        $product = Product::where('id', $id)->first();
+        $categories = Category::select('id','categoryname')->where('parentid', '!=', 0)->get();
+        return view('dashboard.product-update', ['dataInfo' => $product, 'selectItems' => $categories]);
+    }
+
+    // update product details
+    public function update(Request $request) {
+        $request->validate([
+            'productname' => 'required',
+            'order' => 'required | unique:products',
+            'categoryid' => 'required'
+        ]);
+        $info = Product::where('id', $request->productid)->update([
+            'productname' => $request->productname,
+            'order' => $request->order,
+            'categoryid' => $request->categoryid
+        ]);
+        if (!empty($info)) {
+            return redirect()->back('success', 'Product Updated Successfully.');
+        } else {
+            return redirect()->back('error', 'Something went wrong.');
+        }
+    }
 }

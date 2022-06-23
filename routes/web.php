@@ -6,6 +6,7 @@ Use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ImageController;
 
 Route::get('/', function () {
     return view('login');
@@ -51,4 +52,24 @@ Route::controller(ProductController::class)->prefix('admin')->group( function ()
 
     // store product
     Route::post('product/store', 'store')->name('product.store');
+
+    // move to recycle bin 
+    Route::get('product/remove/{id}', 'remove')->name('product.remove');
+
+    // show edit form
+    Route::get('product/edit/{id}', 'edit')->name('product.edit');
+
+    // update product
+    Route::post('product/update', 'update')->name('product.update');
+});
+
+Route::controller(ImageController::class)->prefix('admin/products')->group( function () {
+    // display all available images 
+    Route::get('images', 'index')->name('images.index');
+
+    // show images add form
+    Route::get('images/create', 'create')->name('images.create');
+
+    // store images
+    Route::post('images/store', 'store')->name('images.store');
 });
