@@ -12,6 +12,7 @@ class Image extends Model
     protected $table = "product_image";
 
     protected $fillable = [
+        'price',
         'multipleimages',
         'specification',
         'description',

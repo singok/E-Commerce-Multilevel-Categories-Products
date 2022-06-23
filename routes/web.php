@@ -7,6 +7,7 @@ use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SpecificationController;
 
 Route::get('/', function () {
     return view('login');
@@ -75,4 +76,21 @@ Route::controller(ImageController::class)->prefix('admin/products')->group( func
 
     // remove product image along with description
     Route::get('image/delete/{id}', 'destroy')->name('productimage.remove');
+
+    // edit product image & description
+    Route::get('image/edit/{id}', 'edit')->name('productimage.edit');
+});
+
+Route::controller(SpecificationController::class)->prefix('admin/products')->group( function () {
+    // list all specification
+    Route::get('product/specification/{productname}/{id}', 'index')->name('specification.index');
+
+    // store specificaton details
+    Route::post('specification/store', 'store')->name('specification.add');
+
+    // remove specification 
+    Route::get('specification/{id}', 'destroy')->name('specification.delete');
+
+    // show old data
+    Route::get('specification/edit-specification/{id}', 'edit')->name('specification.edit');
 });

@@ -42,9 +42,9 @@ class ImageController extends Controller
         // validate
         $request->validate([
             'productid' => 'required',
-            'specification' => 'required',
-            'description' => 'required',
-            'images' => 'required'
+            'description' => 'required | unique:product_image',
+            'images' => 'required',
+            'price' => 'required'
         ]);
         $images = $request->file('images');
         $files = array();
@@ -53,11 +53,10 @@ class ImageController extends Controller
             $img->storeAs('public/productimages', $fileName);
             $files[] = $fileName;
         }
-
         // insert details
         $info = Image::create([
+            'price' => $request->price,
             'multipleimages' => implode('|', $files),
-            'specification' => $request->specification,
             'description' => $request->description,
             'productid' => $request->productid
         ]);
@@ -88,7 +87,9 @@ class ImageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $selectProduct = Product::all();
+        $image = Image::where('id', $id)->first();
+        return view('dashboard.image-edit', ['dataInfo' => $image,'selectProductItems' => $selectProduct]);
     }
 
     /**
@@ -124,5 +125,10 @@ class ImageController extends Controller
         } else {
             return back('error', 'Something went wrong.');
         }
+    }
+
+    // show all specification list
+    public function showSpecification($id) {
+        return view('dashboard.specification-list');
     }
 }

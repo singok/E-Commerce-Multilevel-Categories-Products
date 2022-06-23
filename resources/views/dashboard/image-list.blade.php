@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
                             <th scope="col">Specification</th>
                             <th scope="col">Description</th>
                             <th scope="col">Images</th>
@@ -31,7 +32,9 @@
                         @foreach ($dataInfo as $info)
                             <tr>
                                 <td>{{ $info->product->productname }}</td>
-                                <td>{{ $info->specification }}</td>
+                                <td>{{ $info->price }}</td>
+                                <td><a href="{{ route('specification.index', ['productname'=> $info->product->productname, 'id' => $info->product->id]) }}"><i
+                                    class="fa-solid fa-marker" style="color: black"></i></a></td>
                                 <td>{{ $info->description }}</td>
                                 <td>
                                     @php
@@ -43,7 +46,7 @@
                                     @endphp
                                 </td>
                                 <td>
-                                    <a href="{{ route('product.edit', ['id' => $info->id]) }}"><i
+                                    <a href="{{ route('productimage.edit', ['id' => $info->id]) }}"><i
                                             class="fa-solid fa-pen-to-square mr-2" style="color: black"></i></a>
                                     <a href="{{ route('productimage.remove', ['id' => $info->id]) }}"
                                         style="color: red"><i class="fa-solid fa-trash ml-2"></i></a>

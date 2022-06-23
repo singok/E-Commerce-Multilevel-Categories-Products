@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Specification;
 
 class Product extends Model
 {
@@ -25,5 +26,9 @@ class Product extends Model
 
     public function image() {
         return $this->hasOne(Image::class, 'productid');
+    }
+
+    public function specification() {
+        return $this->hasMany(specification::class, 'productid');
     }
 }

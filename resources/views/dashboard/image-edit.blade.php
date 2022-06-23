@@ -1,11 +1,11 @@
 @extends('layout.dashboard')
 
 @section('title')
-    Add Images
+    Update Images
 @endsection
 
 @section('content')
-    <x-content-header heading="Product Images" r-name="product" title="Add" />
+    <x-content-header heading="Product Images" r-name="images.index" title="Update" />
 
     <!-- Main content -->
     <section class="content">
@@ -26,9 +26,9 @@
                     <div class="form-group">
                         <label for="choosenProduct">Product:</label>
                         <select id="choosenProduct" class="form-control" name="productid">
-                            <option value="" selected>Choose...</option>
-                            @foreach ($dataInfo as $info)
-                                <option value='{{ $info->id }}'>{{ $info->productname }}</option>
+                            @foreach ($selectProductItems as $items)
+                                <option value='{{ $items->id }}' @if ($items->id == $dataInfo->productid) selected @endif>
+                                    {{ $items->productname }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,9 +37,9 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <x-input-box type="number" label="Price:" id="productPrice" name="price"
-                        placeholder="Enter Price..." />
-                    @error('price')
+                    <x-input-box type="text" label="Specification:" id="specificationDetails" name="specification"
+                        placeholder="Enter Specification..." value="{{ $dataInfo->specification }}" />
+                    @error('specification')
                         <div class="alert-danger">
                             {{ $message }}
                         </div>
@@ -49,13 +49,22 @@
                             Description:
                         </label>
                         <textarea name="description" id="descriptionDetails" class="form-control" cols="50" rows="6"
-                            placeholder="Enter Description..."></textarea>
+                            placeholder="Enter Description...">{{ $dataInfo->description }}</textarea>
                     </div>
                     @error('description')
                         <div class="alert-danger">
                             {{ $message }}
                         </div>
                     @enderror
+                    <div class="form-control mb-5">
+                        <label>Image:</label>
+                        @php
+                            $arr = explode('|', $dataInfo->multipleimages);
+                            foreach ($arr as $img) {
+                                echo "<img src=".asset('storage/productimages/'.$img)." height='50px' width='50px'>&nbsp;";
+                            }
+                        @endphp
+                    </div>
                     <x-input-box type="file" label="Product Images:" id="multipleImages" name="images[]"
                         placeholder="Select Images..." multiple />
                     @error('images')
@@ -63,7 +72,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>
