@@ -28,7 +28,7 @@ class ProductController extends Controller
             'productname' => 'required',
             'categoryid' => 'required'
         ]);
-        $slug = Str::slug(time().Str::random(50));
+        $slug = Str::slug($request->productname, '-').'-'.Str::random(10);
         $info = Product::create([
             'order' => $request->order,
             'productname' => $request->productname,

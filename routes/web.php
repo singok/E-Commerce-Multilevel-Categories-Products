@@ -8,8 +8,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SpecificationController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\FrontController;
 
-Route::get('/', function () {
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/', 'index')->name('homepage');
+});
+
+Route::get('/admin', function () {
     return view('login');
 })->name('admin.login');
 
@@ -17,12 +23,14 @@ Route::get('register', function () {
     return view('register');
 })->name('admin.register');
 
-Route::post('register', [AdminController::class, 'register'])->name('admin.save');
-Route::post('login', [AdminController::class, 'login'])->name('admin.access'); 
-Route::get('password-forget', [AdminController::class, 'forget'])->name('admin.forget');
-Route::post('password-link', [AdminController::class, 'resetlink'])->name('admin.resetlink');
-Route::get('password/update/{email}/{token}', [AdminController::class, 'update']);  
-Route::get('password/reset/{email}/{token}', [AdminController::class, 'reset'])->name('admin.updatePassword');
+Route::prefix('admin')->group(function () {
+    Route::post('register', [AdminController::class, 'register'])->name('admin.save');
+    Route::post('login', [AdminController::class, 'login'])->name('admin.access'); 
+    Route::get('password-forget', [AdminController::class, 'forget'])->name('admin.forget');
+    Route::post('password-link', [AdminController::class, 'resetlink'])->name('admin.resetlink');
+    Route::get('password/update/{email}/{token}', [AdminController::class, 'update']);  
+    Route::get('password/reset/{email}/{token}', [AdminController::class, 'reset'])->name('admin.updatePassword');
+});
 
 /*----------------Facebook----------------*/
 Route::prefix('auth')->group(function () {
@@ -42,6 +50,7 @@ Route::controller(DashboardController::class)->prefix('admin')->group( function 
     Route::get('category-remove/{id}', 'deletePermanently')->name('category.remove');
     Route::post('category/update', 'updateCategory')->name('category.update');
     Route::get('category-restinct/{id}', 'restoreCategory')->name('category.restinct');
+    Route::get('logout', 'signout')->name('admin.logout');
 });
 
 Route::controller(ProductController::class)->prefix('admin')->group( function () {
@@ -99,4 +108,12 @@ Route::controller(SpecificationController::class)->prefix('admin/products')->gro
 
     // update specification details
     Route::post('specification/update', 'update')->name('specification.update');
+});
+
+Route::controller(RatingController::class)->prefix('admin/rating')->group( function () {
+    // display rating and review
+    Route::get('show/{id}', 'index')->name('rating.index');
+
+    // remove rating
+    Route::get('delete/{id}', 'remove')->name('rating.delete');
 });

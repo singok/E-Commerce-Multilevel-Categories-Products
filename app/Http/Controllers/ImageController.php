@@ -100,7 +100,7 @@ class ImageController extends Controller
 
         // fetch and remove images 
         $images = Image::select('multipleimages')->where('id', $request->imageId)->first();
-        $arr = explode('|', $images);
+        $arr = explode('|', $images->multipleimages);
         foreach($arr as $val) {
             Storage::delete('public/productimages/'.$val);
         }

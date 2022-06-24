@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Specification;
+use App\Models\Rating;
 
 class Product extends Model
 {
@@ -30,5 +31,9 @@ class Product extends Model
 
     public function specification() {
         return $this->hasMany(specification::class, 'productid');
+    }
+
+    public function review() {
+        return $this->hasMany(Rating::class, 'productid');
     }
 }

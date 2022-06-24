@@ -267,6 +267,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('admin.logout') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link">
+                                <p>
+                                    Log out
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

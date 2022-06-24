@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Str;
 
 class DashboardController extends Controller
@@ -11,8 +12,14 @@ class DashboardController extends Controller
     // display dashboard
     public function index() 
     { 
-        $count = Category::count();
-        return view('dashboard.dash', ['categoryCount' => $count]);
+        $countCat = Category::where('parentid', '=', 0)->count();
+        $countSub = Category::where('parentid', '!=', 0)->count();
+        $countProd = Product::count();
+        return view('dashboard.dash', [
+            'categoryCount' => $countCat,
+            'subCategoryCount' => $countSub,
+            'productCount' => $countProd
+        ]);
     }
 
     // display all available categories
@@ -33,7 +40,7 @@ class DashboardController extends Controller
             'order' => 'required | numeric | unique:categories',
             'categoryname' => 'required'
         ]);
-        $autoSlug = Str::slug($request->categoryname.time().Str::random(50), '-');
+        $autoSlug = Str::slug($request->categoryname, '-').'-'.Str::random(10);
         $info = Category::create([
             'categoryname' => $request->categoryname,
             'slug' => $autoSlug,
@@ -116,5 +123,10 @@ class DashboardController extends Controller
             'parentid' => $cid
         ]);
         return back()->with('success', 'Category Updated Successfully.');
+    }
+
+    // log out 
+    public function signout() {
+        return redirect()->route('admin.login')->with('success', 'Logged out successfully.');
     }
 }
