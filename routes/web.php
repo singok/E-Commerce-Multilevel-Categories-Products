@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontController;
 
 Route::controller(FrontController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
+    Route::get('/front/category/{id}', 'display')->name('productpage');
 });
 
 Route::get('/admin', function () {
@@ -117,3 +118,4 @@ Route::controller(RatingController::class)->prefix('admin/rating')->group( funct
     // remove rating
     Route::get('delete/{id}', 'remove')->name('rating.delete');
 });
+
