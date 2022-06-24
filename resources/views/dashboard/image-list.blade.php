@@ -6,7 +6,21 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Product Images" r-name="product" title="Images" />
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Product Images</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('product') }}">Product Images</a></li>
+                        <li class="breadcrumb-item active">Images</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -15,7 +29,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="row m-2">
-                    <x-button r-name="images.create" btn-type="info" label="Add images & description" />
+                    <a href="{{ route('images.create') }}"><button type="button" class="btn btn-info">Add images & description</button></a>
                 </div>
                 <table class="table m-2">
                     <thead>
@@ -33,15 +47,16 @@
                             <tr>
                                 <td>{{ $info->product->productname }}</td>
                                 <td>{{ $info->price }}</td>
-                                <td><a href="{{ route('specification.index', ['productname'=> $info->product->productname, 'id' => $info->product->id]) }}"><i
-                                    class="fa-solid fa-marker" style="color: black"></i></a></td>
+                                <td><a
+                                        href="{{ route('specification.index', ['productname' => $info->product->productname, 'id' => $info->product->id]) }}"><i
+                                            class="fa-solid fa-marker" style="color: black"></i></a></td>
                                 <td>{{ $info->description }}</td>
                                 <td>
                                     @php
                                         $arr = explode('|', $info->multipleimages);
                                         foreach ($arr as $img) {
-                                            $url = asset('storage/productimages/'.$img);
-                                            echo "<img src='".$url."' height='50px' width='50px'>&nbsp;";
+                                            $url = asset('storage/productimages/' . $img);
+                                            echo '<img src="'.$url.'" height="50px" width="50px">&nbsp;';
                                         }
                                     @endphp
                                 </td>

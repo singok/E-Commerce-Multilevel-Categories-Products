@@ -28,9 +28,9 @@ class SpecificationController extends Controller
             'description' => $request->description
         ]);
         if (!empty($info)) {
-            return redirect()->back('success', 'Specification Added.');
+            return redirect()->back()->with('success', 'Specification Added.');
         } else {
-            return redirect()->back('error', 'Something went wrong.');
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -39,18 +39,36 @@ class SpecificationController extends Controller
     {
         $info = Specification::where('id', $id)->delete();
         if (!empty($info)) {
-            return back('success', 'Specification Deleted Successfully.');
+            return back()->with('success', 'Specification Deleted Successfully.');
         } else {
-            return back('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
     // show specification details
     public function edit($id)
     {
-        $info = Specification::where('productid', $id)->first();
+        $info = Specification::where('id', $id)->first();
+        return view('dashboard.specification-edit', ['dataInfo' => $info, 'specId' => $id]);
+    }
+
+    // update specification details
+    public function update(Request $request)
+    {
+        
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'specificationId' => 'required'
+        ]);
+        $info = Specification::where('id', $request->specificationId)->update([
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
         if (!empty($info)) {
-            return json_encode($nfo);
+            return redirect()->back()->with('success', 'Specification Details Updated Successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 }

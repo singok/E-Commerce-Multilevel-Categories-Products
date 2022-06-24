@@ -26,8 +26,7 @@
                 <form action="{{ route('admin.access') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email" name="email"
-                            value="{{ Cookie::get('email') }}">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -40,8 +39,7 @@
                         </div>
                     @enderror
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password"
-                            value="{{ Cookie::get('password') }}">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

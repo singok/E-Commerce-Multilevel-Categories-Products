@@ -6,7 +6,21 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Product" r-name="product" title="products" />
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Product</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('product') }}">Product</a></li>
+                        <li class="breadcrumb-item active">products</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -15,7 +29,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="row m-2">
-                    <x-button r-name="product.add" btn-type="primary" label="Add product" />
+                    <a href="{{ route('product.add') }}"><button type="button" class="btn btn-primary">Add product</button></a>
                 </div>
                 <table class="table m-2">
                     <thead>

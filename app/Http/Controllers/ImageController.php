@@ -62,22 +62,12 @@ class ImageController extends Controller
         ]);
 
         if (!empty($info)) {
-            return back('success', 'Image and Description Added Successfully.');
+            return back()->with('success', 'Image and Description Added Successfully.');
         } else {
-            return back('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -89,7 +79,7 @@ class ImageController extends Controller
     {
         $selectProduct = Product::all();
         $image = Image::where('id', $id)->first();
-        return view('dashboard.image-edit', ['dataInfo' => $image,'selectProductItems' => $selectProduct]);
+        return view('dashboard.image-edit', ['imageid' => $id, 'dataInfo' => $image,'selectProductItems' => $selectProduct]);
     }
 
     /**
@@ -99,9 +89,45 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'productid' => 'required',
+            'images' => 'required',
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+
+        // fetch and remove images 
+        $images = Image::select('multipleimages')->where('id', $request->imageId)->first();
+        $arr = explode('|', $images);
+        foreach($arr as $val) {
+            Storage::delete('public/productimages/'.$val);
+        }
+
+        // insert new images
+        $newImages = $request->file('images');
+        $imageData = array();
+        foreach($newImages as $img) {
+            $fileName = time().'_'.$img->getClientOriginalName();
+            $img->storeAs('public/productimages', $fileName);
+            $imageData[] = $fileName;
+        }
+        $imageNameCollection = implode('|', $imageData);
+
+        // insert data into database
+        $info = Image::where('id', $request->imageId)->update([
+            'price' => $request->price,
+            'multipleimages' => $imageNameCollection,
+            'description' => $request->description,
+            'productid' => $request->productid
+        ]);
+
+        if(!empty($info)) {
+            return redirect()->back()->with('success', 'Images & Details Updated Successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
     }
 
     /**
@@ -121,9 +147,9 @@ class ImageController extends Controller
         }
         $imageDetailDeleted = $image->delete();
         if (!empty($imageDetailDeleted) && !empty($pathDeleted)) {
-            return back('success', 'Product deleted successfully.');
+            return back()->with('success', 'Product deleted successfully.');
         } else {
-            return back('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 

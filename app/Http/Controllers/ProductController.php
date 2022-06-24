@@ -36,9 +36,9 @@ class ProductController extends Controller
             'slug' => $slug
         ]);
         if (!empty($info)) {
-            return redirect()->back('success', 'Product Added Successfully.');
+            return redirect()->back()->with('success', 'Product Added Successfully.');
         } else {
-            return redirect()->back('error', 'Something went wrong.');
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -46,9 +46,9 @@ class ProductController extends Controller
     public function remove($id) {
         $info = Product::where('id', $id)->delete();
         if (!empty($info)) {
-            return redirect()->back('success', 'Product deleted successfully.');
+            return redirect()->back()->with('success', 'Product deleted successfully.');
         } else {
-            return redirect()->back('error', 'Something went wrong.');
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -72,9 +72,9 @@ class ProductController extends Controller
             'categoryid' => $request->categoryid
         ]);
         if (!empty($info)) {
-            return redirect()->back('success', 'Product Updated Successfully.');
+            return redirect()->back()->with('success', 'Product Updated Successfully.');
         } else {
-            return redirect()->back('error', 'Something went wrong.');
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 }

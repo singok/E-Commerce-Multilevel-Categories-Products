@@ -6,7 +6,21 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Category" r-name="category" title="category" />
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Category</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('category') }}">Category</a></li>
+                        <li class="breadcrumb-item active">category</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -15,7 +29,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="row m-2">
-                    <x-button r-name="category.add" btn-type="primary" label="Add Category" /> 
+                    <a href="{{ route('category.add') }}"><button type="button" class="btn btn-primary">Add Category</button></a>
                 </div>
                 <table class="table m-2">
                     <thead>

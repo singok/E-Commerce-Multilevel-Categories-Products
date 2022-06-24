@@ -79,6 +79,9 @@ Route::controller(ImageController::class)->prefix('admin/products')->group( func
 
     // edit product image & description
     Route::get('image/edit/{id}', 'edit')->name('productimage.edit');
+
+    // product images with details clicked
+    Route::post('image/update', 'update')->name('images.update');
 });
 
 Route::controller(SpecificationController::class)->prefix('admin/products')->group( function () {
@@ -93,4 +96,7 @@ Route::controller(SpecificationController::class)->prefix('admin/products')->gro
 
     // show old data
     Route::get('specification/edit-specification/{id}', 'edit')->name('specification.edit');
+
+    // update specification details
+    Route::post('specification/update', 'update')->name('specification.update');
 });

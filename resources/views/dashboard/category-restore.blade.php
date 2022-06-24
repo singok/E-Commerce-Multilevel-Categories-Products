@@ -6,7 +6,21 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Deleted Categories" r-name="category" title="category-deleted" />
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Deleted Categories</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('category') }}">Deleted Categories</a></li>
+                        <li class="breadcrumb-item active">category-deleted</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->

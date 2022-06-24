@@ -40,14 +40,6 @@ class AdminController extends Controller
             'email' => 'required | email',
             'password' => 'required'
         ]);
-
-        if ($request->remember) {
-            Cookie::queue(Cookie::make('email', $request->email, 1));
-            Cookie::queue(Cookie::make('password', $request->pasword, 1));
-        } elseif (!$request->remember) {
-            Cookie::queue(Cookie::forget('email'));
-            Cookie::queue(Cookie::forget('password'));
-        }
         
         $isEmail = Admin::where('email', $request->email)->first();
         if ($isEmail && Hash::check($request->password, $isEmail->password)) {

@@ -41,9 +41,9 @@ class DashboardController extends Controller
             'order' => $request->order
         ]);
         if (!empty($info)) {
-            return back('success', 'Category Added Successfully.');
+            return back()->with('success', 'Category Added Successfully.');
         } else {
-            return back('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -57,9 +57,9 @@ class DashboardController extends Controller
 
         $info = $category->delete();
         if ($info) {
-            return back('success', 'Category Deleted Successfully.');
+            return back()->with('success', 'Category Deleted Successfully.');
         } else {
-            return back('error', 'Something went wrong');
+            return back()->with('error', 'Something went wrong');
         }
     }
 
@@ -92,9 +92,9 @@ class DashboardController extends Controller
     public function deletePermanently($id) {
         $info = Category::withTrashed()->where('id', $id)->orWhere('parentid', $id)->forceDelete();
         if ($info) {
-            return back('success', 'Category Deleted Successfully');
+            return back()->with('success', 'Category Deleted Successfully');
         } else {
-            return back('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -115,6 +115,6 @@ class DashboardController extends Controller
         Category::where('parentid', $cid)->update([
             'parentid' => $cid
         ]);
-        return back('success', 'Category Updated Successfully.');
+        return back()->with('success', 'Category Updated Successfully.');
     }
 }

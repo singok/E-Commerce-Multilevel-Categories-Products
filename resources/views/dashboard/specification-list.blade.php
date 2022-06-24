@@ -6,7 +6,21 @@
 
 @section('content')
     <!-- Content Header (Page header) -->
-    <x-content-header heading="Specification - {{ $productname }}" r-name="images.index" title="list" />
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Specification - {{ $productname }}</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('images.index') }}">Specification</a></li>
+                        <li class="breadcrumb-item active">list</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -23,6 +37,8 @@
                         {{ Session::get('error') }}
                     </div>
                 @endif
+            </div>
+            <div class="row">
                 <div class="row m-2">
                     <form action="{{ route('specification.add') }}" method="POST">
                         @csrf
@@ -78,21 +94,4 @@
             </div>
         </div>
     </section>
-    @push('script')
-        <script>
-            $(document).ready(function() {
-                $('#updateSpecification').on('click', function() {
-                    var path = $(this).attr('href');
-                    $.ajax({
-                        _token: '{{ csrf_token() }}',
-                        url: path,
-                        type: 'GET',
-                        success: function(data) {
-                            console.log(data);
-                        }
-                    });
-                });
-            });
-        </script>
-    @endpush
 @endsection

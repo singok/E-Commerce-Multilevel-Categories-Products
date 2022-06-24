@@ -182,8 +182,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
 
@@ -192,7 +192,8 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Alexander Pierce</a>
@@ -216,11 +217,56 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <x-nav rname="admin.dashboard" name="Dashboard" icon="rectangle-list"/>
-                        <x-nav rname="category" name="Category" icon="layer-group"/>
-                        <x-nav rname="product" name="Product" icon="list-check"/>
-                        <x-nav rname="images.index" name="Product Images" icon="images" />
-                        <x-nav rname="category.restore" name="Deleted Category" icon="trash" />
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('admin.dashboard') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link {{ Request::routeIs('admin.dashboard') ? 'active' : '' }}">
+                                <i class="fa-solid fa-rectangle-list fa-lg"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('category') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link {{ Request::routeIs('category') ? 'active' : '' }}">
+                                <i class="fa-solid fa-layer-group fa-lg"></i>
+                                <p>
+                                    Category
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('product') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link {{ Request::routeIs('product') ? 'active' : '' }}">
+                                <i class="fa-solid fa-list-check fa-lg"></i>
+                                <p>
+                                    Product
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('images.index') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link {{ Request::routeIs('images.index') ? 'active' : '' }}">
+                                <i class="fa-solid fa-images fa-lg"></i>
+                                <p>
+                                    Product Images
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="{{ route('category.restore') }}" onMouseOver="this.style.color='#0362fc'"
+                                onMouseOut="this.style.color='white'"
+                                class="nav-link {{ Request::routeIs('category.restore') ? 'active' : '' }}">
+                                <i class="fa-solid fa-trash fa-lg"></i>
+                                <p>
+                                    Deleted Category
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
